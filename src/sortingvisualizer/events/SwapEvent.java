@@ -21,7 +21,7 @@ public class SwapEvent<T> implements SortEvent<T>{
 	
 	public void apply(ArrayList<T> l){
 		T temp = l.get(affectedIndex1);
-		l.set(affectedIndex1, l.get(affectedIndex1));
+		l.set(affectedIndex1, l.get(affectedIndex2));
 		l.set(affectedIndex2, temp);
 		
 	}

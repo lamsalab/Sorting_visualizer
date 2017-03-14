@@ -10,7 +10,6 @@ import java.util.Random;
 public class NoteIndices {
 	private int n;
 	private int[] arr;
-	private Scale scale;
 	private boolean[] highlighted;
     /**
      * @param n the size of the scale object that these indices map into
@@ -27,7 +26,7 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
-    	int[] arr = new int[n];
+    	//int[] arr = new int[n];
     	Random rand = new Random();
     	for (int i =0; i < n; i++){
     		arr[i] = i;
@@ -38,8 +37,6 @@ public class NoteIndices {
     		arr[index] = arr[j];
     		arr[j] = temp;
     	}
-
-    	this.scale = new Scale(arr);
     }
     
     /** @return the indices of this NoteIndices object */
@@ -68,6 +65,10 @@ public class NoteIndices {
     public void clearAllHighlighted() {
         for (int i = 0; i < highlighted.length; i++){
         	highlighted[i] = false;
-        }
+        }      
     }
-}
+    public int getN(){
+    	return n;
+    }
+   }
+

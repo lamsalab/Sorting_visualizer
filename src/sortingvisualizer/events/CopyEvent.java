@@ -3,7 +3,7 @@ package sortingvisualizer.events;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopyEvent<T> {
+public class CopyEvent<T> implements SortEvent<T>{
 	public List<Integer> copyList; 
 	public int affectedIndex;
 	public T value;
