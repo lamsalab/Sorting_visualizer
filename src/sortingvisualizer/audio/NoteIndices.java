@@ -1,5 +1,7 @@
 package sortingvisualizer.audio;
 
+import java.util.Random;
+
 /**
  * A collection of indices into a Scale object.
  * These indices are the subject of the various sorting algorithms
@@ -7,7 +9,9 @@ package sortingvisualizer.audio;
  */
 public class NoteIndices {
 	private int n;
-
+	private int[] arr;
+	private Scale scale;
+	private boolean[] highlighted;
     /**
      * @param n the size of the scale object that these indices map into
      */
@@ -23,13 +27,28 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
-        // TODO: fill me in
+    	int[] arr = new int[n];
+    	Random rand = new Random();
+    	for (int i =0; i < n; i++){
+    		arr[i] = i;
+    	}
+    	for (int j = 0;j < n; j++){
+    		int index = rand.nextInt(n);
+    		int temp = arr[index];
+    		arr[index] = arr[j];
+    		arr[j] = temp;
+    	}
+
+    	this.scale = new Scale(arr);
     }
     
     /** @return the indices of this NoteIndices object */
     public Integer[] getNotes() { 
-        // TODO: fill me in
-        return null;
+        Integer[] arr2 = new Integer[n];
+        for (int i = 0; i < arr.length; i++){
+        	arr2[i] = (Integer) arr[i];
+        }
+        return arr2;
     }
     
     /**
@@ -37,17 +56,18 @@ public class NoteIndices {
      * @param index the index to highlight
      */
     public void highlightNote(int index) {
-        // TODO: fill me in
+    	this.highlighted[index] = true;
     }
     
     /** @return true if the given index is highlighted */
     public boolean isHighlighted(int index) {
-        // TODO: fill me in
-        return false;
+    	return highlighted[index];
     }
     
     /** Clears all highlighted indices from this collection */
     public void clearAllHighlighted() {
-        // TODO: fill me in
+        for (int i = 0; i < highlighted.length; i++){
+        	highlighted[i] = false;
+        }
     }
 }

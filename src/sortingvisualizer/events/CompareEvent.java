@@ -14,6 +14,7 @@ public class CompareEvent<T> implements SortEvent<T>{
 		this.affectedIndex1= affectedIndex1;
 		this.affectedIndex2= affectedIndex2;
 		this.isEmphasized= false;
+		compareList = new ArrayList<>();
 		compareList.add(affectedIndex1);
 		compareList.add(affectedIndex2);
 	}

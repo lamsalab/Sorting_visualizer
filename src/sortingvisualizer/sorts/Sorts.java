@@ -9,10 +9,11 @@ import sortingvisualizer.events.SwapEvent;
 
 public class Sorts {
 	public static <T extends Comparable<T>> List<SortEvent<T>> selectionSort(ArrayList<T> l) {
-		List<SortEvent<T>> ret = new List<SortEvent<T>>();
+		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 0; i < l.size(); i++) {
 			for (int j = i + 1; j < l.size(); j++) {
 				if (l.get(j).compareTo(l.get(i)) < 0) {
+					
 					ret.add(new CompareEvent(j, i));
 					swap(l, i, j);
 					ret.add(new SwapEvent(j, i));
@@ -29,7 +30,7 @@ public class Sorts {
 	}
 
 	public static <T extends Comparable<T>> List<SortEvent<T>> Insertion(ArrayList<T> l) {
-		List<SortEvent<T>> ret = new List<SortEvent<T>>();
+		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 1; i < l.size(); i++) {
 			for (int j = i; j > 0 && l.get(j - 1).compareTo(l.get(j)) > 0; j--) {
 				ret.add(new CompareEvent(j - 1, j));
@@ -41,7 +42,7 @@ public class Sorts {
 	}
 
 	public static <T extends Comparable<T>> List<SortEvent<T>> bubbleSort(ArrayList<T> l) {
-		List<SortEvent<T>> ret = new List<SortEvent<T>>();
+		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		boolean swapped = true;
 		while (swapped) {
 			swapped = false;
@@ -66,7 +67,7 @@ public class Sorts {
 	 *            example
 	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> shellsort(ArrayList<T> l) {
-		List<SortEvent<T>> ret = new List<SortEvent<T>>();
+		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		int j;
 		for (int gap = l.size() / 2; gap > 0; gap /= 2) {
 			for (int i = gap; i < l.size(); i++) {
@@ -171,7 +172,7 @@ public class Sorts {
 	}
 
 	public static <T extends Comparable<T>> List<SortEvent<T>> quickSort(ArrayList<T> l) {
-		quickSortHelper(l, 0, l.size());
+		quickSortHelper(l, 0, l.size()-1);
 		return null;
 	}
 
@@ -195,7 +196,7 @@ public class Sorts {
 		l.add(10);
 		l.add(15);
 		l.add(-3);
-		shellsort(l);
+		quickSort(l);
 		System.out.print(l.toString());
 	}
 }
