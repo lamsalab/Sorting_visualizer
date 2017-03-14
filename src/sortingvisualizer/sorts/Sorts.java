@@ -14,9 +14,9 @@ public class Sorts {
 			for (int j = i + 1; j < l.size(); j++) {
 				if (l.get(j).compareTo(l.get(i)) < 0) {
 					
-					ret.add(new CompareEvent(j, i));
+					ret.add(new CompareEvent<T>(j, i));
 					swap(l, i, j);
-					ret.add(new SwapEvent(j, i));
+					ret.add(new SwapEvent<T>(j, i));
 				}
 			}
 		}
@@ -33,9 +33,9 @@ public class Sorts {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 1; i < l.size(); i++) {
 			for (int j = i; j > 0 && l.get(j - 1).compareTo(l.get(j)) > 0; j--) {
-				ret.add(new CompareEvent(j - 1, j));
+				ret.add(new CompareEvent<T>(j - 1, j));
 				swap(l, j - 1, j);
-				ret.add(new SwapEvent(j - 1, j));
+				ret.add(new SwapEvent<T>(j - 1, j));
 			}
 		}
 		return ret;
@@ -47,10 +47,10 @@ public class Sorts {
 		while (swapped) {
 			swapped = false;
 			for (int i = 1; i < l.size(); i++) {
-				ret.add(new CompareEvent(i - 1, i));
+				ret.add(new CompareEvent<T>(i - 1, i));
 				if (l.get(i - 1).compareTo(l.get(i)) > 0) {
 					swap(l, i - 1, i);
-					ret.add(new SwapEvent(i - 1, i));
+					ret.add(new SwapEvent<T>(i - 1, i));
 					swapped = true;
 				}
 			}
@@ -73,12 +73,12 @@ public class Sorts {
 			for (int i = gap; i < l.size(); i++) {
 				T temp = l.get(i);
 				for (j = i; j >= gap && temp.compareTo(l.get(j - gap)) < 0; j -= gap) {
-					ret.add(new CompareEvent(i, j-gap));
+					ret.add(new CompareEvent<T>(i, j-gap));
 					l.set(j, l.get(j - gap));
-					ret.add(new CopyEvent(j, j-gap));
+					ret.add(new CopyEvent<T>(j, j-gap));
 				}
 				l.set(j, temp);
-				ret.add(new CopyEvent(j, i));
+				ret.add(new CopyEvent<T>(j, i));
 			}
 		}
 		return ret;
@@ -87,7 +87,7 @@ public class Sorts {
 	private static <T extends Comparable<T>> void merge(ArrayList<T> l, int lo, int mid, int hi) {
 		ArrayList<T> temp = new ArrayList<>();
 		T filler = null;
-		for (int p = 0; p < l.size(); p++) {
+		for (int p = 0; p < l.size()-1; p++) {
 			temp.add(p, filler);
 		}
 		int i = lo;
@@ -119,10 +119,11 @@ public class Sorts {
 		System.out.println(l.toString());
 
 		if (lo != hi) {
-			mergeSortHelper(l, lo, (lo + hi) / 2);
+			int middle= lo + (hi - lo)/2;
+			mergeSortHelper(l, lo, middle);
 			System.out.println("hello");
-			mergeSortHelper(l, ((lo + hi) / 2) + 1, hi);
-			merge(l, lo, (hi + lo) / 2, hi);
+			mergeSortHelper(l, middle + 1, hi);
+			merge(l, lo, middle, hi);
 		}
 	}
 
@@ -196,7 +197,7 @@ public class Sorts {
 		l.add(10);
 		l.add(15);
 		l.add(-3);
-		quickSort(l);
+		mergeSort(l);
 		System.out.print(l.toString());
 	}
 }

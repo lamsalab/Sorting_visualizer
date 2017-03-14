@@ -13,6 +13,7 @@ public class CopyEvent<T> {
 		this.affectedIndex= affectedIndex;
 		this.isEmphasized= true;
 		this.value = value;
+		copyList = new ArrayList<>();
 		copyList.add(affectedIndex);
 	}
 	

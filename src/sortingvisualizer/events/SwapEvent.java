@@ -13,6 +13,7 @@ public class SwapEvent<T> implements SortEvent<T>{
 		this.affectedIndex1= first;
 		this.affectedIndex2= second;
 		this.isEmphasized=true;
+		swapList = new ArrayList<>();
 		swapList.add(affectedIndex1);
 		swapList.add(affectedIndex2);
 		
