@@ -1,4 +1,4 @@
-package edu.grinnell.sortingvisualizer;
+package sortingvisualizer.rendering;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import edu.grinnell.sortingvisualizer.sortevents.SortEvent;
-import edu.grinnell.sortingvisualizer.sorts.Sorts;
+import sortingvisualizer.audio.NoteIndices;
+import sortingvisualizer.audio.Scale;
+import sortingvisualizer.events.SortEvent;
+import sortingvisualizer.sorts.Sorts;
 
 /**
  * The Control Panel houses the GUI for interacting with the Sounds of

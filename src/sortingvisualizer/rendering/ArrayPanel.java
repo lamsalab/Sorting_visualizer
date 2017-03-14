@@ -1,9 +1,11 @@
-package edu.grinnell.sortingvisualizer;
+package sortingvisualizer.rendering;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+
+import sortingvisualizer.audio.NoteIndices;
 
 @SuppressWarnings("serial")
 public class ArrayPanel extends JPanel {

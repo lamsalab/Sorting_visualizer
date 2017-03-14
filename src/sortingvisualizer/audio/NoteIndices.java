@@ -1,4 +1,4 @@
-package edu.grinnell.sortingvisualizer;
+package sortingvisualizer.audio;
 
 /**
  * A collection of indices into a Scale object.
@@ -6,12 +6,14 @@ package edu.grinnell.sortingvisualizer;
  * in the program.
  */
 public class NoteIndices {
+	private int n;
 
     /**
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
-        // TODO: fill me in
+    	
+        this.n=n;
     }
     
     /**
