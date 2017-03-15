@@ -28,16 +28,21 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
-    	//int[] arr = new int[n];
+    	int[] arr = new int[n];
     	Random rand = new Random();
-    	for (int i =0; i < n; i++){
+    	for (int i =0; i < n-1; i++){
     		arr[i] = i;
     	}
-    	for (int j = 0;j < n; j++){
+    	for (int j = 0;j < n-1; j++){
     		int index = rand.nextInt(n);
     		int temp = arr[index];
     		arr[index] = arr[j];
     		arr[j] = temp;
+    	}
+    	 this.arr= new int[n]; 
+    	System.out.println(this.arr[0]);
+    	for (int i=0; i<n-1; i++){
+    		this.arr[i]= arr[i];
     	}
     }
     

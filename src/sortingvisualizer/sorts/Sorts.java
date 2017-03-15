@@ -13,10 +13,12 @@ public class Sorts {
 		for (int i = 0; i < l.size(); i++) {
 			for (int j = i + 1; j < l.size(); j++) {
 				if (l.get(j).compareTo(l.get(i)) < 0) {
-
 					ret.add(new CompareEvent<T>(j, i));
-					swap(l, i, j);
-					ret.add(new SwapEvent<T>(j, i));
+					SortEvent<T> c= new SwapEvent<T>(j, i);
+					c.apply(l);
+					//swap(l, i, j);
+					ret.add(c);
+					
 				}
 			}
 		}
@@ -186,7 +188,7 @@ public class Sorts {
 				median = hi;
 			swap(l, median, l.size()-1);
 			partition(l, lo, hi, median);
-			// swap(l, median, hi);
+			//swap(l, median, hi);
 			quickSortHelper(l, lo, median);
 			quickSortHelper(l, median + 1, hi);
 		}
@@ -194,11 +196,6 @@ public class Sorts {
 
 	public static <T extends Comparable<T>> List<SortEvent<T>> quickSort(ArrayList<T> l) {
 		quickSortHelper(l, 0, l.size() - 1);
-		return null;
-	}
-
-	public static <T extends Comparable<T>> List<SortEvent<T>> customSort(T[] arr) {
-		// TODO: implement your own custom sort
 		return null;
 	}
 
