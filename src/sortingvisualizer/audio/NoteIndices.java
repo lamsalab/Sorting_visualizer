@@ -1,6 +1,8 @@
 package sortingvisualizer.audio;
 
 import java.util.Random;
+import java.util.*;
+
 
 /**
  * A collection of indices into a Scale object.
@@ -40,12 +42,20 @@ public class NoteIndices {
     }
     
     /** @return the indices of this NoteIndices object */
-    public Integer[] getNotes() { 
+   /* public Integer[] getNotes() { 
         Integer[] arr2 = new Integer[n];
         for (int i = 0; i < arr.length; i++){
         	arr2[i] = (Integer) arr[i];
         }
         return arr2;
+    }*/
+    public ArrayList<Integer> getNotes(){
+    	ArrayList<Integer> arr2= new ArrayList<Integer>();
+    	for (int i=0; i< arr2.size(); i++){
+    		arr2.add(arr[i]);
+    	}
+    	return arr2;
+    	
     }
     
     /**

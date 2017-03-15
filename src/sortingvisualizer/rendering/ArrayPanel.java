@@ -1,5 +1,6 @@
 package sortingvisualizer.rendering;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -31,13 +32,26 @@ public class ArrayPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		int j= 0;
-		for (int i=0; i < notes.getNotes().length-1; i++) {
-			g.drawRect(j, j, notes.getNotes().length / notes.getN(), notes.getNotes()[i]);
-			g.fillRect(j, j, notes.getNotes().length / notes.getN(), notes.getNotes()[i]);
-			j += notes.getNotes().length / notes.getN();
-		}
-		
-		
-	}
-	
+		int i= 0;
+		int width=  notes.getNotes().size() / notes.getN();
+		int height= notes.getNotes().get(i);
+		for (i= 0; i < notes.getNotes().size(); i++) {
+			g.drawRect(j, j, width, height);
+			g.fillRect(j, j, width, height);
+			g.setColor(Color.WHITE);
+			if (notes.isHighlighted(i)){
+				g.setColor(Color.RED);
+			}
+			else{
+				if (i%2 == 1){
+					g.setColor(Color.BLUE);
+				}
+				else{
+					g.setColor(Color.GREEN);
+				}
+			}
+			
+			j += width;
+		}						
+	}	
 }

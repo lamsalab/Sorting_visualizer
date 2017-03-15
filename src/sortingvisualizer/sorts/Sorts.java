@@ -29,7 +29,7 @@ public class Sorts {
 		l.set(j, t);
 	}
 
-	public static <T extends Comparable<T>> List<SortEvent<T>> Insertion(ArrayList<T> l) {
+	public static <T extends Comparable<T>> List<SortEvent<T>> insertionSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 1; i < l.size(); i++) {
 			for (int j = i; j > 0 && l.get(j - 1).compareTo(l.get(j)) > 0; j--) {
@@ -66,7 +66,7 @@ public class Sorts {
 	 *            http://stackoverflow.com/questions/4833423/shell-sort-java-
 	 *            example
 	 */
-	public static <T extends Comparable<T>> List<SortEvent<T>> shellsort(ArrayList<T> l) {
+	public static <T extends Comparable<T>> List<SortEvent<T>> customSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		int j;
 		for (int gap = l.size() / 2; gap > 0; gap /= 2) {
@@ -203,10 +203,9 @@ public class Sorts {
 	}
 
 	public <T> void eventSort(ArrayList<T> l, List<SortEvent<T>> events) {
-		for (SortEvent<T> i : events) {
-			i.apply(l);
+		for(int i=0; i< events.size(); i++){
+			events.get(i).apply(l);
 		}
-
 	}
 
 	public static void main(String[] args) {
