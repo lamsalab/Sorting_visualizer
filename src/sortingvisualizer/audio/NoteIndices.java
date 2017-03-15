@@ -10,15 +10,17 @@ import java.util.*;
  * in the program.
  */
 public class NoteIndices {
-	private int n;
-	private int[] arr;
-	private boolean[] highlighted;
+	public int n;
+	public int[] arr;
+	public boolean[] highlighted;
+	public ArrayList<Integer> arr2;
     /**
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
     	
         this.n=n;
+
     }
     
     /**
@@ -28,6 +30,10 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
+        this.highlighted = new boolean[n];
+        for (int i = 0; i < n; i++){
+        	this.highlighted[i] = false;
+        }
     	int[] arr = new int[n];
     	Random rand = new Random();
     	for (int i =0; i < n-1; i++){
@@ -40,26 +46,19 @@ public class NoteIndices {
     		arr[j] = temp;
     	}
     	 this.arr= new int[n]; 
-    	System.out.println(this.arr[0]);
     	for (int i=0; i<n-1; i++){
     		this.arr[i]= arr[i];
     	}
     }
     
     /** @return the indices of this NoteIndices object */
-   /* public Integer[] getNotes() { 
-        Integer[] arr2 = new Integer[n];
-        for (int i = 0; i < arr.length; i++){
-        	arr2[i] = (Integer) arr[i];
-        }
-        return arr2;
-    }*/
+
     public ArrayList<Integer> getNotes(){
-    	ArrayList<Integer> arr2= new ArrayList<Integer>();
-    	for (int i=0; i< arr2.size(); i++){
-    		arr2.add(arr[i]);
+    	ArrayList<Integer> arr3= new ArrayList<Integer>();
+    	for (int i=0; i< arr.length; i++){
+    		arr3.add(arr[i]);
     	}
-    	return arr2;
+    	return arr3;
     	
     }
     
@@ -84,6 +83,11 @@ public class NoteIndices {
     }
     public int getN(){
     	return n;
+    }
+    public void update(ArrayList<Integer> l){
+    	for (int i=0; i< arr.length; i++){
+    		arr[i] = l.get(i);
+    	}
     }
    }
 

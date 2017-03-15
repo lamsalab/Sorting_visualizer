@@ -199,7 +199,7 @@ public class Sorts {
 		return null;
 	}
 
-	public <T> void eventSort(ArrayList<T> l, List<SortEvent<T>> events) {
+	public static <T> void eventSort(ArrayList<T> l, List<SortEvent<T>> events) {
 		for(int i=0; i< events.size(); i++){
 			events.get(i).apply(l);
 		}
@@ -213,7 +213,11 @@ public class Sorts {
 		l.add(10);
 		l.add(15);
 		l.add(-3);
-		quickSort(l);
+		ArrayList<Integer> l2 = (ArrayList<Integer>)l.clone();
+		List<SortEvent<Integer>> list = selectionSort(l);
+		eventSort(l2, list);
+		
 		System.out.print(l.toString());
+		System.out.print(l2.toString());
 	}
 }
