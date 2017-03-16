@@ -8,29 +8,45 @@ import sortingvisualizer.events.SortEvent;
 import sortingvisualizer.events.SwapEvent;
 
 public class Sorts {
+	/**
+	 * 
+	 * @param l ArrayList to be sorted
+	 * @return ret a List<Sortevent<T>>
+	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> selectionSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 0; i < l.size(); i++) {
 			for (int j = i + 1; j < l.size(); j++) {
 				if (l.get(j).compareTo(l.get(i)) < 0) {
 					ret.add(new CompareEvent<T>(j, i));
-					SortEvent<T> c= new SwapEvent<T>(j, i);
+					SortEvent<T> c = new SwapEvent<T>(j, i);
 					c.apply(l);
-					//swap(l, i, j);
+					// swap(l, i, j);
 					ret.add(c);
-					
+
 				}
 			}
 		}
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @param i an index that will be swapped
+	 * @param j an index that will be swapped
+	 */
 	public static <T> void swap(ArrayList<T> l, int i, int j) {
 		T t = l.get(i);
 		l.set(i, l.get(j));
 		l.set(j, t);
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @return ret a List<Sortevent<T>>
+	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> insertionSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		for (int i = 1; i < l.size(); i++) {
@@ -43,6 +59,11 @@ public class Sorts {
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @param l  an ArrayList that will be modified
+	 * @return ret a List<Sortevent<T>>
+	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> bubbleSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		boolean swapped = true;
@@ -60,13 +81,11 @@ public class Sorts {
 		return ret;
 	}
 
+
 	/**
-	 * Shellsort, using Shell’s (poor) increments.
 	 * 
-	 * @param a
-	 *            an array of Comparable items.
-	 *            http://stackoverflow.com/questions/4833423/shell-sort-java-
-	 *            example
+	 * @param l an ArrayList that will be modified
+	 * @return ret a List<Sortevent<T>>
 	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> customSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
@@ -86,6 +105,14 @@ public class Sorts {
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @param lo low index
+	 * @param mid middle index
+	 * @param hi  high index
+	 * 
+	 */
 	private static <T extends Comparable<T>> void merge(ArrayList<T> l, int lo, int mid, int hi,
 			List<SortEvent<T>> ret) {
 		ArrayList<T> temp = new ArrayList<>();
@@ -124,6 +151,13 @@ public class Sorts {
 		}
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @param lo low index
+	 * @param hi high index
+	 * 
+	 */
 	private static <T extends Comparable<T>> void mergeSortHelper(ArrayList<T> l, int lo, int hi,
 			List<SortEvent<T>> ret) {
 		if (lo != hi) {
@@ -134,6 +168,11 @@ public class Sorts {
 		}
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @return ret a List<Sortevent<T>>
+	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> mergeSort(ArrayList<T> l) {
 		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
 		if (l.size() <= 1) {
@@ -142,82 +181,67 @@ public class Sorts {
 		mergeSortHelper(l, 0, l.size() - 1, ret);
 		return ret;
 	}
+
 	// http://www.cs.mcgill.ca/~dprecup/courses/IntroCS/Examples/Sorting/MergeSort.java
-
-	public static <T extends Comparable<T>> void partition(ArrayList<T> l, int low, int hi, int pivotIndex) {
-		/*
-		 * swap(l, pivotIndex, l.size()); while (low != hi) { if
-		 * (l.get(low).compareTo(l.get(l.size())) > 0) { low++; } if
-		 * (l.get(hi).compareTo(l.get(l.size())) < 0) { hi--; } if
-		 * ((l.get(low).compareTo(l.get(l.size())) < 0) &&
-		 * (l.get(hi).compareTo(l.get(l.size())) > 0)) { swap(l, low, hi); } }
-		 * swap(l, l.size(), low);
-		 */
-		/*
-		 * int i = low-1; for (int j = low; j < hi - 1; j++) { if
-		 * (l.get(j).compareTo(l.get(hi)) <= 0) { i++; swap(l, i, j); } }
-		 * swap(l, i + 1, hi);
-		 */
-		T pivot = l.get(l.size()-1);
-		while (low != hi) {
-			while ((l.get(low).compareTo(pivot) <= 0) && (hi != low)) {
-				low++;
-			}
-			while ((l.get(hi).compareTo(pivot) >= 0) && (hi != low)) {
-				hi--;
-			}
-			swap(l, low, hi);
-		}
-		swap(l, low, l.size()-1);
-	}
-
-	private static <T extends Comparable<T>> void quickSortHelper(ArrayList<T> l, int lo, int hi) {
+	// http://www.learntosolveit.com/java/GenericQuickSort.html
+	 // http://stackoverflow.com/questions/4833423/shell-sort-java-example
+	
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @param lo low index
+	 * @param hi high index
+	 * 
+	 */
+	private static <T extends Comparable<T>> void quickSortHelper(ArrayList<T> l, int lo, int hi,
+			List<SortEvent<T>> ret) {
 		if (lo < hi) {
-			int mid = (hi - lo) / 2;
-			int median = 0;
-			ArrayList<T> temp = new ArrayList<T>();
-			temp.add(l.get(lo));
-			temp.add(l.get(mid));
-			temp.add(l.get(hi));
-			selectionSort(temp);
-			if (temp.get(1) == l.get(lo))
-				median = lo;
-			if (temp.get(1) == l.get(mid))
-				median = mid;
-			if (temp.get(1) == l.get(hi))
-				median = hi;
-			swap(l, median, l.size()-1);
-			partition(l, lo, hi, median);
-			//swap(l, median, hi);
-			quickSortHelper(l, lo, median);
-			quickSortHelper(l, median + 1, hi);
+			int i = lo;
+			int j = hi;
+			T pivot = l.get((hi + lo) / 2);
+			do {
+				while (l.get(i).compareTo(pivot) < 0) {
+					ret.add(new CompareEvent<T>(i, (hi + lo) / 2));
+					i++;
+				}
+				while (l.get(j).compareTo(pivot) > 0) {
+					ret.add(new CompareEvent<T>(i, (hi + lo) / 2));
+					j--;
+				}
+				if (i <= j) {
+					ret.add(new SwapEvent<T>(i, j));
+					swap(l, i, j);
+					i++;
+					j--;
+				}
+
+			} while (i <= j);
+			quickSortHelper(l, lo, j, ret);
+			quickSortHelper(l, i, hi, ret);
 		}
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @return ret a List<Sortevent<T>>
+	 */
 	public static <T extends Comparable<T>> List<SortEvent<T>> quickSort(ArrayList<T> l) {
-		quickSortHelper(l, 0, l.size() - 1);
-		return null;
+		List<SortEvent<T>> ret = new ArrayList<SortEvent<T>>();
+		if (l.size() > 0)
+			quickSortHelper(l, 0, l.size() - 1, ret);
+		return ret;
 	}
 
+	/**
+	 * 
+	 * @param l an ArrayList that will be modified
+	 * @param events a List<Sortevent<T>>
+	 */
 	public static <T> void eventSort(ArrayList<T> l, List<SortEvent<T>> events) {
-		for(int i=0; i< events.size(); i++){
+		for (int i = 0; i < events.size(); i++) {
 			events.get(i).apply(l);
 		}
 	}
 
-	public static void main(String[] args) {
-		ArrayList<Integer> l = new ArrayList<>();
-		l.add(5);
-		l.add(2);
-		l.add(0);
-		l.add(10);
-		l.add(15);
-		l.add(-3);
-		ArrayList<Integer> l2 = (ArrayList<Integer>)l.clone();
-		List<SortEvent<Integer>> list = selectionSort(l);
-		eventSort(l2, list);
-		
-		System.out.print(l.toString());
-		System.out.print(l2.toString());
-	}
 }

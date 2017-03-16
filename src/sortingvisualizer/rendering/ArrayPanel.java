@@ -34,7 +34,9 @@ public class ArrayPanel extends JPanel {
 		this.width= width;
 		this.height= height;
 	}
-
+	/**
+	 * @param g A graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		g.clearRect(0, 0, width, height);
@@ -45,14 +47,13 @@ public class ArrayPanel extends JPanel {
 		g.fillRect(0, 0, rectWidth, rectHeight);
 		g.setColor(Color.black);
 		for (int i= 0; i < notes.getNotes().size(); i++) {
-			System.out.println(i + " " + indices.get(i));
 			if (notes.isHighlighted(i)){
 				g.setColor(Color.yellow);
 			}
 			else {
-				g.setColor(Color.green);
+				g.setColor(Color.black);
 			}
-			g.fillRect(rectWidth*i, 300-rectHeight*indices.get(i), rectWidth,rectHeight*indices.get(i));
+			g.fillRect(rectWidth*i, 300-rectHeight*(1+indices.get(i)), rectWidth,rectHeight*(1+ indices.get(i)));
 		}
 		notes.clearAllHighlighted();
 		

@@ -36,17 +36,18 @@ public class NoteIndices {
         }
     	int[] arr = new int[n];
     	Random rand = new Random();
-    	for (int i =0; i < n-1; i++){
+    	for (int i =0; i < n; i++){
     		arr[i] = i;
     	}
-    	for (int j = 0;j < n-1; j++){
-    		int index = rand.nextInt(n);
-    		int temp = arr[index];
+    	int index, temp;
+    	for (int j = 0;j < n; j++){
+    		index = rand.nextInt(n);
+    		temp = arr[index];
     		arr[index] = arr[j];
     		arr[j] = temp;
     	}
     	 this.arr= new int[n]; 
-    	for (int i=0; i<n-1; i++){
+    	for (int i=0; i<n; i++){
     		this.arr[i]= arr[i];
     	}
     }
@@ -84,6 +85,10 @@ public class NoteIndices {
     public int getN(){
     	return n;
     }
+    /**
+     * 
+     * @param l ArrayList to be copied to arr
+     */
     public void update(ArrayList<Integer> l){
     	for (int i=0; i< arr.length; i++){
     		arr[i] = l.get(i);
